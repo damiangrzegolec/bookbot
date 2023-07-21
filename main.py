@@ -10,8 +10,8 @@ def count_letters(path):
                     letters[l] += 1
                 else:
                     letters[l] = 1
-    
-    print(letters)
+    return letters
+
 
 def print_words(path):
     with open(path) as f:
@@ -29,5 +29,26 @@ def count_words(path):
             count += 1
     return count
 
-print(count_letters("books/frank.txt"))
+
+def report(path):
+    letters = count_letters(path)
+    report = {}
+    for letter, num in letters.items():
+        if letter.isalpha():
+            report[letter] = num
+    item_list = list(report.items())
+    word_count = count_words(path)
+    item_list.sort()
+
+    print(f"Begin report of {path}")
+    print(f"{word_count} words found in the document")
+    print(f"\n\n")
+    for item in item_list:
+        print(f"The {item[0]} character was found {item[1]} times")
+    print(f"\n\n")
+    print(f"End report of {path}")
+
+
+
+report("books/frank.txt")
 
